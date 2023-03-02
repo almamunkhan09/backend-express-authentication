@@ -1,7 +1,22 @@
-import express from 'express';
+// Import required packages
+import * as dotenv from 'dotenv';
+import Express from 'express';
+import routes from './routes';
+import connect from './utils/connect';
+import logger from './utils/logger';
 
-const app = express();
+dotenv.config();
 
-app.listen('3500', () => {
-  console.log('Application is listening at post 3500');
+const app = Express();
+const PORT = process.env.PORT || 3500;
+// console.log(PORT);
+
+app.listen(PORT, async () => {
+  logger.info(`Application is listening at http://localhost:${PORT}`);
+  await connect();
+  routes(app);
+});
+
+app.get('/', (req, res) => {
+  res.status(200).json('Hello');
 });
