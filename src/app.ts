@@ -1,13 +1,14 @@
 // Import required packages
 import * as dotenv from 'dotenv';
-import Express from 'express';
+import express from 'express';
 import routes from './routes';
 import connect from './utils/connect';
 import logger from './utils/logger';
 
 dotenv.config();
 
-const app = Express();
+const app = express();
+app.use(express.json());
 const PORT = process.env.PORT || 3500;
 // console.log(PORT);
 
